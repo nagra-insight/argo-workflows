@@ -13,7 +13,7 @@ const (
 	DefaultArchivePattern = "{{workflow.name}}/{{pod.name}}"
 
 	// Container names used in the workflow pod
-	MainContainerName = "main"
+	MainContainerName = "base"
 	InitContainerName = "init"
 	WaitContainerName = "wait"
 
