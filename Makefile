@@ -14,11 +14,11 @@ GIT_TREE_STATE         = $(shell if [ -z "`git status --porcelain`" ]; then echo
 DEV_BRANCH             = $(shell [ $(GIT_BRANCH) = master ] || [ `echo $(GIT_BRANCH) | cut -c -8` = release- ] && echo false || echo true)
 
 # docker image publishing options
-IMAGE_NAMESPACE       ?= argoproj
+IMAGE_NAMESPACE       ?= quay.io/nagra
 # The name of the namespace where Kubernetes resources/RBAC will be installed
 KUBE_NAMESPACE        ?= argo
 
-VERSION               := latest
+VERSION               := $(GIT_BRANCH)
 DOCKER_PUSH           := false
 
 # VERSION is the version to be used for files in manifests and should always be latest uunlesswe are releasing
@@ -231,7 +231,7 @@ executor-image: dist/argoexec.image
 dist/argoexec.image: $(ARGOEXEC_PKGS)
 	# Create executor image
 	$(call docker_build,argoexec)
-	touch dist/argoexec.image
+	# touch dist/argoexec.image
 
 # generation
 
